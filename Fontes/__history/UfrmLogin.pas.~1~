@@ -1,0 +1,221 @@
+unit UfrmLogin;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.Buttons, Vcl.ExtCtrls,
+  Vcl.Imaging.pngimage, Vcl.StdCtrls, Vcl.Imaging.jpeg, FireDAC.Stan.Intf,
+  FireDAC.Stan.Option, FireDAC.Stan.Param, FireDAC.Stan.Error, FireDAC.DatS,
+  FireDAC.Phys.Intf, FireDAC.DApt.Intf, FireDAC.Stan.Async, FireDAC.DApt,
+  Data.DB, FireDAC.Comp.DataSet, FireDAC.Comp.Client;
+
+type
+  TfrmLogin = class(TForm)
+    pnl_central: TPanel;
+    pnl_principal: TPanel;
+    shp_fundo: TShape;
+    pnl_usuario: TPanel;
+    lbl_nome_usuario: TLabel;
+    edt_cnpj_emp: TEdit;
+    pnl_barra_nome: TPanel;
+    pnl_senha: TPanel;
+    lbl_senha: TLabel;
+    edt_senha: TEdit;
+    pnl_barra_senha: TPanel;
+    pnl_entrar: TPanel;
+    btn_entrar: TSpeedButton;
+    pnl_cancelar: TPanel;
+    btn_cancelar: TSpeedButton;
+    pnl_suspenso: TPanel;
+    lbl_login: TLabel;
+    img_logo_empresa: TImage;
+    lbl_texto: TLabel;
+    btn_servidor: TSpeedButton;
+    btn_ferramentas: TSpeedButton;
+    btn_ajuda: TSpeedButton;
+    procedure btn_fecharClick(Sender: TObject);
+    procedure FormResize(Sender: TObject);
+    procedure FormClose(Sender: TObject; var Action: TCloseAction);
+    procedure btn_entrarClick(Sender: TObject);
+    procedure btn_servidorClick(Sender: TObject);
+    procedure btn_ferramentasClick(Sender: TObject);
+    procedure FormShow(Sender: TObject);
+    procedure btn_ajudaClick(Sender: TObject);
+    procedure edt_senhaKeyPress(Sender: TObject; var Key: Char);
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  frmLogin: TfrmLogin;
+
+implementation
+
+{$R *.dfm}
+
+uses UfrmPrincipal, Udm, UfrmConfig, unit_esmaecer_fundo;
+
+
+procedure TfrmLogin.btn_ajudaClick(Sender: TObject);
+begin
+  ShowMessage('Contato: whats 066 99975-3027');
+end;
+
+procedure TfrmLogin.btn_entrarClick(Sender: TObject);
+var
+  sql_Login : TFDQuery;
+  md5 : string;
+begin
+
+
+    if edt_senha.Text = '' then
+    begin
+    exit;
+    end;
+
+    if edt_cnpj_emp.Text = '' then
+    begin
+      exit;
+    end;
+
+
+    sql_Login := TFDQuery.Create(self);
+    sql_Login.Connection := dm.conexao;
+    try
+
+
+      try
+
+        sql_Login.Active := false;
+        sql_Login.SQL.Clear;
+        sql_Login.SQL.Add('select md5(:senha) as MD5_;');
+        sql_Login.ParamByName('senha').AsString := edt_senha.Text;
+        sql_Login.Active := true;
+
+        if sql_Login.RecordCount = 0 then
+        begin
+        ShowMessage('Falha na conexão com o servidor, solicite suporte..');
+        exit;
+        end
+        else
+        begin
+        md5 := sql_Login.FieldByName('MD5_').AsString;
+        end;
+
+        sql_Login.Active := false;
+        sql_Login.SQL.Clear;
+        sql_Login.SQL.Add('select usuario.Codigo as CodigoUsuario, usuario.Acessa_ECoBI, usuario.CodEmp as CodEmp, ');
+        sql_Login.SQL.Add('empresa.descricao as DescEmp, ');
+        sql_Login.SQL.Add('empresa.Cidade as CidadeEmpAcessada, empresa.Uf as UfEmpAcessada,');
+        sql_Login.SQL.Add('empresa.Fone as Telefone_Emp, empresa.Ie, ');
+        sql_Login.SQL.Add('empresa.Cnpj as CnpjEmpAcessada, usuario.Nome as NomeUsuario from usuario ');
+        sql_Login.SQL.Add('left join empresa on empresa.codigo = usuario.CodEmp ');
+        sql_Login.SQL.Add('where PassWord = :Password and usuario.Sit_Desativado = 0 limit 1 ');
+        sql_Login.ParamByName('Password').AsString := md5;
+        sql_Login.Active := true;
+
+        if sql_Login.RecordCount = 0 then
+        begin
+        frmPrincipal.vLoginConfirmado := 0;
+        ShowMessage('Senha invalida, solicite suporte..');
+        edt_senha.Text := '';
+        edt_senha.SetFocus;
+        exit;
+        end
+        else
+        begin
+        frmPrincipal.vLoginConfirmado := 1;
+        frmPrincipal.spb_usuario.Caption := sql_Login.FieldByName('NomeUsuario').AsString;
+        frmPrincipal.spb_Empresa.Caption := dm.vNomeEmpresa;
+        frmPrincipal.vCodEmpLogado := dm.vCodEmpLogado;
+        frmPrincipal.vCnpjEmpresaLogado := dm.vCnpjEmpresaLogado;
+        frmPrincipal.vPfj := dm.vPfj;
+        frmPrincipal.vApiKey := dm.vApiKey;
+        frmLogin.Close;
+        end;
+
+
+      except
+      ShowMessage('Falha na conexão com o servidor, solicite suporte..');
+      exit;
+      end;
+
+
+
+
+
+    finally
+    sql_Login.Close;
+    sql_Login.DisposeOf;
+    end;
+
+
+end;
+
+procedure TfrmLogin.btn_fecharClick(Sender: TObject);
+begin
+  Application.Terminate;
+end;
+
+procedure TfrmLogin.btn_ferramentasClick(Sender: TObject);
+begin
+ ShowMessage('versão 15.0 - '+
+             'Data: 07/10/2021');
+end;
+
+procedure TfrmLogin.btn_servidorClick(Sender: TObject);
+begin
+
+  if not Assigned(form_esmaecer_fundo) then
+  begin
+    Application.CreateForm(Tform_esmaecer_fundo,form_esmaecer_fundo);
+  end;
+
+  form_esmaecer_fundo.Show;
+
+
+  if not Assigned(frmConfig) then
+  begin
+    Application.CreateForm(TfrmConfig,frmConfig);
+  end;
+
+  frmConfig.ShowModal;
+
+end;
+
+procedure TfrmLogin.edt_senhaKeyPress(Sender: TObject; var Key: Char);
+begin
+
+  if Key = #13 then
+  begin
+    btn_entrarClick(self);
+  end;
+
+end;
+
+procedure TfrmLogin.FormClose(Sender: TObject; var Action: TCloseAction);
+begin
+
+  {Limpar o formulario da memoria ao fecha-lo..}
+  Action := TCloseAction.caFree;
+  frmLogin := nil;
+  {Fim}
+
+end;
+
+procedure TfrmLogin.FormResize(Sender: TObject);
+begin
+  pnl_central.Top  := Round ( frmLogin.Height / 2 - pnl_central.Height / 2 );
+  pnl_central.Left := Round ( frmLogin.Width / 2 - pnl_central.Width / 2 );
+end;
+
+procedure TfrmLogin.FormShow(Sender: TObject);
+begin
+  edt_cnpj_emp.Text := dm.vCnpjEmpresaLogado;
+  edt_senha.SetFocus;
+end;
+
+end.

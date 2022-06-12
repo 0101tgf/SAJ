@@ -1,0 +1,22 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<BorlandProject>
+	<Transactions>
+    <Transaction>2021/08/09 09:16:38.000.233,=C:\Users\0101tgf\Documents\Embarcadero\Studio\Projects\Unit1.pas</Transaction>
+    <Transaction>2021/08/09 10:01:59.000.597,=C:\Users\0101tgf\Documents\Embarcadero\Studio\Projects\Unit1.pas</Transaction>
+    <Transaction>2021/08/09 10:02:51.000.525,=C:\Users\0101tgf\Documents\Embarcadero\Studio\Projects\Unit1.pas</Transaction>
+    <Transaction>2021/08/09 10:03:29.000.840,=C:\Users\0101tgf\Documents\Embarcadero\Studio\Projects\Unit1.pas</Transaction>
+    <Transaction>2021/08/09 10:04:05.000.343,=C:\Users\0101tgf\Documents\Embarcadero\Studio\Projects\Unit1.pas</Transaction>
+    <Transaction>2021/08/09 10:04:40.000.456,=C:\Users\0101tgf\Documents\Embarcadero\Studio\Projects\Unit1.pas</Transaction>
+    <Transaction>2021/09/23 11:28:53.000.357,=C:\Users\0101tgf\Documents\Embarcadero\Studio\Projects\Unit1.pas</Transaction>
+    <Transaction>2021/11/04 15:17:53.000.419,=C:\Users\0101tgf\Documents\Embarcadero\Studio\Projects\Unit1.pas</Transaction>
+    <Transaction>2021/11/04 16:40:13.000.707,C:\Users\0101tgf\Documents\Code\Delphi\Fontes\SAJ\Fontes\ufrmPrincipal.dfm=C:\Users\0101tgf\Documents\Embarcadero\Studio\Projects\Unit1.dfm</Transaction>
+    <Transaction>2021/11/04 16:40:13.000.707,C:\Users\0101tgf\Documents\Code\Delphi\Fontes\SAJ\Fontes\ufrmPrincipal.pas=C:\Users\0101tgf\Documents\Embarcadero\Studio\Projects\Unit1.pas</Transaction>
+    <Transaction>2021/11/04 16:40:19.000.879,C:\Users\0101tgf\Documents\Code\Delphi\Fontes\SAJ\SAJ.dproj=C:\Users\0101tgf\Documents\Embarcadero\Studio\Projects\Project1.dproj</Transaction>
+    <Transaction>2021/11/04 16:59:04.000.620,=C:\Users\0101tgf\Documents\Code\Delphi\Fontes\SAJ\Unit1.pas</Transaction>
+    <Transaction>2021/11/04 16:59:41.000.579,C:\Users\0101tgf\Documents\Code\Delphi\Fontes\SAJ\Unit1.pas=C:\Users\0101tgf\Documents\Code\Delphi\Fontes\SAJ\Fontes\ufrmSimulacao.pas</Transaction>
+    <Transaction>2021/11/04 16:59:41.000.579,C:\Users\0101tgf\Documents\Code\Delphi\Fontes\SAJ\Unit1.dfm=C:\Users\0101tgf\Documents\Code\Delphi\Fontes\SAJ\Fontes\ufrmSimulacao.dfm</Transaction>
+    <Transaction>2021/11/04 17:13:35.000.339,=C:\Users\0101tgf\Documents\Code\Delphi\Fontes\SAJ\Unit1.pas</Transaction>
+    <Transaction>2021/11/04 17:14:13.000.014,C:\Users\0101tgf\Documents\Code\Delphi\Fontes\SAJ\Classes\cJuros.pas=C:\Users\0101tgf\Documents\Code\Delphi\Fontes\SAJ\Unit1.pas</Transaction>
+    <Transaction>2021/11/04 20:56:01.000.925,=C:\Users\0101tgf\Documents\Code\Delphi\Fontes\SAJ\Fontes\UfrmLogin.pas</Transaction>
+  </Transactions>
+</BorlandProject>
