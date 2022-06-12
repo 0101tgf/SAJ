@@ -76,12 +76,14 @@ begin
 end;
 
 procedure TfrmPrincipal.spb_rapido_calcularClick(Sender: TObject);
-var
-  vForm : TfrmSimulacao;
 begin
 
-  vForm := TfrmSimulacao.Create(self);
-  vForm.Show;
+  if not Assigned(frmSimulacao) then
+  begin
+    Application.CreateForm(TfrmSimulacao,frmSimulacao);
+  end;
+
+  frmSimulacao.Show;
 
 end;
 
