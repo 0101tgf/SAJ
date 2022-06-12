@@ -34,6 +34,8 @@ implementation
 
 { TJuros }
 
+{Teste Tecnico}
+
 {$region 'CONSTRUTOR E DESTRUIDOR'}
 constructor TJuros.Create(pCapital, pTx_Juros: Currency; pMeses: Integer);
 begin
