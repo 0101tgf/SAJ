@@ -103,7 +103,7 @@ object frmSimulacao: TfrmSimulacao
       end
       object Edit_Capital: TEdit
         Left = 13
-        Top = 22
+        Top = 21
         Width = 100
         Height = 21
         TabOrder = 0
@@ -111,7 +111,7 @@ object frmSimulacao: TfrmSimulacao
         OnKeyPress = Edit_CapitalKeyPress
       end
       object Edit_TaxaJuros: TEdit
-        Left = 120
+        Left = 121
         Top = 21
         Width = 100
         Height = 21
@@ -119,14 +119,14 @@ object frmSimulacao: TfrmSimulacao
         Text = '0,00'
         OnKeyPress = Edit_TaxaJurosKeyPress
       end
-      object Edit_Messes: TEdit
+      object Edit_Meses: TEdit
         Left = 231
         Top = 21
         Width = 100
         Height = 21
         TabOrder = 2
         Text = '0'
-        OnKeyPress = Edit_MessesKeyPress
+        OnKeyPress = Edit_MesesKeyPress
       end
     end
     object pnl_cancelar: TPanel
